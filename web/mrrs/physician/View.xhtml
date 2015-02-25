@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPhysicianTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPhysicianLabel_id}"/>
+                    <h:outputText value="#{physicianController.selected.id}" title="#{bundle.ViewPhysicianTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewPhysicianLabel_name}"/>
+                    <h:outputText value="#{physicianController.selected.name}" title="#{bundle.ViewPhysicianTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewPhysicianLabel_specialization}"/>
+                    <h:outputText value="#{physicianController.selected.specialization}" title="#{bundle.ViewPhysicianTitle_specialization}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{physicianController.destroyAndView}" value="#{bundle.ViewPhysicianDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPhysicianEditLink}"/>
+                <br />
+                <h:commandLink action="#{physicianController.prepareCreate}" value="#{bundle.ViewPhysicianCreateLink}" />
+                <br />
+                <h:commandLink action="#{physicianController.prepareList}" value="#{bundle.ViewPhysicianShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPhysicianIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

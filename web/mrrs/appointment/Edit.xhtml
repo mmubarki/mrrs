@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAppointmentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAppointmentLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{appointmentController.selected.id}" title="#{bundle.EditAppointmentTitle_id}" required="true" requiredMessage="#{bundle.EditAppointmentRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditAppointmentLabel_appointmentDATE}" for="appointmentDATE" />
+                    <h:inputText id="appointmentDATE" value="#{appointmentController.selected.appointmentDATE}" title="#{bundle.EditAppointmentTitle_appointmentDATE}" required="true" requiredMessage="#{bundle.EditAppointmentRequiredMessage_appointmentDATE}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditAppointmentLabel_clinicId}" for="clinicId" />
+                    <h:selectOneMenu id="clinicId" value="#{appointmentController.selected.clinicId}" title="#{bundle.EditAppointmentTitle_clinicId}" required="true" requiredMessage="#{bundle.EditAppointmentRequiredMessage_clinicId}">
+                        <f:selectItems value="#{clinicController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditAppointmentLabel_physicianID}" for="physicianID" />
+                    <h:selectOneMenu id="physicianID" value="#{appointmentController.selected.physicianID}" title="#{bundle.EditAppointmentTitle_physicianID}" required="true" requiredMessage="#{bundle.EditAppointmentRequiredMessage_physicianID}">
+                        <f:selectItems value="#{physicianController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditAppointmentLabel_recordId}" for="recordId" />
+                    <h:selectOneMenu id="recordId" value="#{appointmentController.selected.recordId}" title="#{bundle.EditAppointmentTitle_recordId}" required="true" requiredMessage="#{bundle.EditAppointmentRequiredMessage_recordId}">
+                        <f:selectItems value="#{medicalRecordController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{appointmentController.update}" value="#{bundle.EditAppointmentSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAppointmentViewLink}"/>
+                <br />
+                <h:commandLink action="#{appointmentController.prepareList}" value="#{bundle.EditAppointmentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAppointmentIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

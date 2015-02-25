@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMedicalRecordTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{medicalRecordController.selected.id}" title="#{bundle.CreateMedicalRecordTitle_id}" required="true" requiredMessage="#{bundle.CreateMedicalRecordRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_report}" for="report" />
+                    <h:inputText id="report" value="#{medicalRecordController.selected.report}" title="#{bundle.CreateMedicalRecordTitle_report}" required="true" requiredMessage="#{bundle.CreateMedicalRecordRequiredMessage_report}"/>
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_recipe}" for="recipe" />
+                    <h:inputText id="recipe" value="#{medicalRecordController.selected.recipe}" title="#{bundle.CreateMedicalRecordTitle_recipe}" required="true" requiredMessage="#{bundle.CreateMedicalRecordRequiredMessage_recipe}"/>
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_recipeDATE}" for="recipeDATE" />
+                    <h:inputText id="recipeDATE" value="#{medicalRecordController.selected.recipeDATE}" title="#{bundle.CreateMedicalRecordTitle_recipeDATE}" required="true" requiredMessage="#{bundle.CreateMedicalRecordRequiredMessage_recipeDATE}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_originalID}" for="originalID" />
+                    <h:inputText id="originalID" value="#{medicalRecordController.selected.originalID}" title="#{bundle.CreateMedicalRecordTitle_originalID}" />
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_patientID}" for="patientID" />
+                    <h:selectOneMenu id="patientID" value="#{medicalRecordController.selected.patientID}" title="#{bundle.CreateMedicalRecordTitle_patientID}" required="true" requiredMessage="#{bundle.CreateMedicalRecordRequiredMessage_patientID}">
+                        <f:selectItems value="#{patientController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_physicianId}" for="physicianId" />
+                    <h:selectOneMenu id="physicianId" value="#{medicalRecordController.selected.physicianId}" title="#{bundle.CreateMedicalRecordTitle_physicianId}" required="true" requiredMessage="#{bundle.CreateMedicalRecordRequiredMessage_physicianId}">
+                        <f:selectItems value="#{physicianController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMedicalRecordLabel_clinicId}" for="clinicId" />
+                    <h:selectOneMenu id="clinicId" value="#{medicalRecordController.selected.clinicId}" title="#{bundle.CreateMedicalRecordTitle_clinicId}" required="true" requiredMessage="#{bundle.CreateMedicalRecordRequiredMessage_clinicId}">
+                        <f:selectItems value="#{clinicController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{medicalRecordController.create}" value="#{bundle.CreateMedicalRecordSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{medicalRecordController.prepareList}" value="#{bundle.CreateMedicalRecordShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateMedicalRecordIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

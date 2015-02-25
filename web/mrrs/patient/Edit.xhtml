@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPatientTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPatientLabel_id}" for="id" />
+                    <h:inputText disabled="true" id="id" value="#{patientController.selected.id}" title="#{bundle.EditPatientTitle_id}" required="true" requiredMessage="#{bundle.EditPatientRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditPatientLabel_firstName}" for="firstName" />
+                    <h:inputText id="firstName" value="#{patientController.selected.firstName}" title="#{bundle.EditPatientTitle_firstName}" required="true" requiredMessage="#{bundle.EditPatientRequiredMessage_firstName}"/>
+                    <h:outputLabel value="#{bundle.EditPatientLabel_lastName}" for="lastName" />
+                    <h:inputText id="lastName" value="#{patientController.selected.lastName}" title="#{bundle.EditPatientTitle_lastName}" required="true" requiredMessage="#{bundle.EditPatientRequiredMessage_lastName}"/>
+                    <h:outputLabel value="#{bundle.EditPatientLabel_birthDate}" for="birthDate" />
+                    <h:inputText id="birthDate" value="#{patientController.selected.birthDate}" title="#{bundle.EditPatientTitle_birthDate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditPatientLabel_address}" for="address" />
+                    <h:inputText id="address" value="#{patientController.selected.address}" title="#{bundle.EditPatientTitle_address}" required="true" requiredMessage="#{bundle.EditPatientRequiredMessage_address}"/>
+                    <h:outputLabel value="#{bundle.EditPatientLabel_city}" for="city" />
+                    <h:inputText id="city" value="#{patientController.selected.city}" title="#{bundle.EditPatientTitle_city}" />
+                    <h:outputLabel value="#{bundle.EditPatientLabel_state}" for="state" />
+                    <h:inputText id="state" value="#{patientController.selected.state}" title="#{bundle.EditPatientTitle_state}" />
+                    <h:outputLabel value="#{bundle.EditPatientLabel_zip}" for="zip" />
+                    <h:inputText id="zip" value="#{patientController.selected.zip}" title="#{bundle.EditPatientTitle_zip}" />
+                    <h:outputLabel value="#{bundle.EditPatientLabel_mobile}" for="mobile" />
+                    <h:inputText id="mobile" value="#{patientController.selected.mobile}" title="#{bundle.EditPatientTitle_mobile}" />
+                    <h:outputLabel value="#{bundle.EditPatientLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{patientController.selected.email}" title="#{bundle.EditPatientTitle_email}" />
+                </h:panelGrid>
+                <h:commandLink action="#{patientController.update}" value="#{bundle.EditPatientSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPatientViewLink}"/>
+                <br />
+                <h:commandLink action="#{patientController.prepareList}" value="#{bundle.EditPatientShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPatientIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

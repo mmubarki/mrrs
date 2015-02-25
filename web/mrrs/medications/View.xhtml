@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMedicationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMedicationsLabel_id}"/>
+                    <h:outputText value="#{medicationsController.selected.id}" title="#{bundle.ViewMedicationsTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewMedicationsLabel_name}"/>
+                    <h:outputText value="#{medicationsController.selected.name}" title="#{bundle.ViewMedicationsTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewMedicationsLabel_recipe}"/>
+                    <h:outputText value="#{medicationsController.selected.recipe}" title="#{bundle.ViewMedicationsTitle_recipe}"/>
+                    <h:outputText value="#{bundle.ViewMedicationsLabel_recipeDATE}"/>
+                    <h:outputText value="#{medicationsController.selected.recipeDATE}" title="#{bundle.ViewMedicationsTitle_recipeDATE}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewMedicationsLabel_recordId}"/>
+                    <h:outputText value="#{medicationsController.selected.recordId}" title="#{bundle.ViewMedicationsTitle_recordId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{medicationsController.destroyAndView}" value="#{bundle.ViewMedicationsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMedicationsEditLink}"/>
+                <br />
+                <h:commandLink action="#{medicationsController.prepareCreate}" value="#{bundle.ViewMedicationsCreateLink}" />
+                <br />
+                <h:commandLink action="#{medicationsController.prepareList}" value="#{bundle.ViewMedicationsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewMedicationsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

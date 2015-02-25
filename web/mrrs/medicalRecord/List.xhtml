@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMedicalRecordTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListMedicalRecordEmpty}" rendered="#{medicalRecordController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{medicalRecordController.items.rowCount > 0}">
+                    <h:outputText value="#{medicalRecordController.pagination.pageFirstItem + 1}..#{medicalRecordController.pagination.pageLastItem + 1}/#{medicalRecordController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{medicalRecordController.previous}" value="#{bundle.Previous} #{medicalRecordController.pagination.pageSize}" rendered="#{medicalRecordController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{medicalRecordController.next}" value="#{bundle.Next} #{medicalRecordController.pagination.pageSize}" rendered="#{medicalRecordController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{medicalRecordController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_report}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.report}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_recipe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recipe}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_recipeDATE}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recipeDATE}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_originalID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.originalID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_patientID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.patientID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_physicianId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.physicianId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMedicalRecordTitle_clinicId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clinicId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{medicalRecordController.prepareView}" value="#{bundle.ListMedicalRecordViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{medicalRecordController.prepareEdit}" value="#{bundle.ListMedicalRecordEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{medicalRecordController.destroy}" value="#{bundle.ListMedicalRecordDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{medicalRecordController.prepareCreate}" value="#{bundle.ListMedicalRecordCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListMedicalRecordIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

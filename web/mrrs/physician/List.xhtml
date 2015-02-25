@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPhysicianTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPhysicianEmpty}" rendered="#{physicianController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{physicianController.items.rowCount > 0}">
+                    <h:outputText value="#{physicianController.pagination.pageFirstItem + 1}..#{physicianController.pagination.pageLastItem + 1}/#{physicianController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{physicianController.previous}" value="#{bundle.Previous} #{physicianController.pagination.pageSize}" rendered="#{physicianController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{physicianController.next}" value="#{bundle.Next} #{physicianController.pagination.pageSize}" rendered="#{physicianController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{physicianController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPhysicianTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPhysicianTitle_name}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPhysicianTitle_specialization}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.specialization}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{physicianController.prepareView}" value="#{bundle.ListPhysicianViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{physicianController.prepareEdit}" value="#{bundle.ListPhysicianEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{physicianController.destroy}" value="#{bundle.ListPhysicianDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{physicianController.prepareCreate}" value="#{bundle.ListPhysicianCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPhysicianIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

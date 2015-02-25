@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMedicationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMedicationsLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{medicationsController.selected.id}" title="#{bundle.EditMedicationsTitle_id}" required="true" requiredMessage="#{bundle.EditMedicationsRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditMedicationsLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{medicationsController.selected.name}" title="#{bundle.EditMedicationsTitle_name}" required="true" requiredMessage="#{bundle.EditMedicationsRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.EditMedicationsLabel_recipe}" for="recipe" />
+                    <h:inputText id="recipe" value="#{medicationsController.selected.recipe}" title="#{bundle.EditMedicationsTitle_recipe}" required="true" requiredMessage="#{bundle.EditMedicationsRequiredMessage_recipe}"/>
+                    <h:outputLabel value="#{bundle.EditMedicationsLabel_recipeDATE}" for="recipeDATE" />
+                    <h:inputText id="recipeDATE" value="#{medicationsController.selected.recipeDATE}" title="#{bundle.EditMedicationsTitle_recipeDATE}" required="true" requiredMessage="#{bundle.EditMedicationsRequiredMessage_recipeDATE}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMedicationsLabel_recordId}" for="recordId" />
+                    <h:selectOneMenu id="recordId" value="#{medicationsController.selected.recordId}" title="#{bundle.EditMedicationsTitle_recordId}" required="true" requiredMessage="#{bundle.EditMedicationsRequiredMessage_recordId}">
+                        <f:selectItems value="#{medicalRecordController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{medicationsController.update}" value="#{bundle.EditMedicationsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMedicationsViewLink}"/>
+                <br />
+                <h:commandLink action="#{medicationsController.prepareList}" value="#{bundle.EditMedicationsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMedicationsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

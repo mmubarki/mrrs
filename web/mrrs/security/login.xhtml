@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>login page</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="loginForm" > 
+        <!--<form method="post" action="j_security_check">-->
+        <h:panelGroup rendered="#{user != null}" >
+            <script>
+               javascript:window.parent.frames["index"].open('#{userController.viewPage}',"_self");
+               javascript:window.parent.frames["menu"].open("/mrrs/faces/index.xhtml","_self");
+            </script>
+            <p>Welcome #{user.name} , you have been logged in!</p>
+            
+            <h:commandButton action="#{userController.logout()}"
+                             value="Logout"  >
+                
+            </h:commandButton>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{user == null}"> 
+            <h:outputText value="User Type" />
+            <h:selectOneMenu id="User_Type" value="#{userController.selected.user_Type}" 
+                            required="true" requiredMessage="Please select type">
+                <f:selectItem itemLabel="Select Model" itemValue=""  /> 
+                <f:selectItem itemLabel="Administrator" itemValue="1"  /> 
+                <f:selectItem itemLabel="Physician" itemValue="2"  /> 
+                <f:selectItem itemLabel="Patient" itemValue="3"  />  
+            </h:selectOneMenu> <br/>
+           <h:outputText value="User Id" />
+           <h:inputText id="id" value="#{userController.selected.reference_id}" 
+                      required="true"  requiredMessage="Please enter user id"  label="User Id"
+                      pt:placeholder="user id">
+            </h:inputText>
+            <br/>
+            <h:outputText value="Password" />
+
+            <h:inputSecret id="password" value="#{userController.selected.password}"
+                       required="true"    label="Password"
+                       pt:placeholder="password"/>
+            <script>
+                    javascript:window.parent.frames["menu"].open("/mrrs/faces/menu.xhtml","_self");
+                    javascript:window.parent.frames["index"].open("/mrrs/faces/welcome.xhtml","_self");
+            
+            </script>
+            <h:commandButton action="#{userController.isLoginMatch()}" 
+                             value="Login"  >
+                <f:param name="id" value="#{userController.selected.id}"></f:param>
+            </h:commandButton>
+        </h:panelGroup>
+       <!-- </form>-->
+        </h:form> 
+
+    </h:body> 
+
+</html>
+

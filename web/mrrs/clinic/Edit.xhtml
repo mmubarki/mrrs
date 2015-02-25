@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditClinicTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditClinicLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{clinicController.selected.name}" title="#{bundle.EditClinicTitle_name}" required="true" requiredMessage="#{bundle.EditClinicRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.EditClinicLabel_address}" for="address" />
+                    <h:inputText id="address" value="#{clinicController.selected.address}" title="#{bundle.EditClinicTitle_address}" required="true" requiredMessage="#{bundle.EditClinicRequiredMessage_address}"/>
+                    <h:outputLabel value="#{bundle.EditClinicLabel_city}" for="city" />
+                    <h:inputText id="city" value="#{clinicController.selected.city}" title="#{bundle.EditClinicTitle_city}" />
+                    <h:outputLabel value="#{bundle.EditClinicLabel_state}" for="state" />
+                    <h:inputText id="state" value="#{clinicController.selected.state}" title="#{bundle.EditClinicTitle_state}" />
+                    <h:outputLabel value="#{bundle.EditClinicLabel_zip}" for="zip" />
+                    <h:inputText id="zip" value="#{clinicController.selected.zip}" title="#{bundle.EditClinicTitle_zip}" />
+                </h:panelGrid>
+                <h:commandLink action="#{clinicController.update}" value="#{bundle.EditClinicSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditClinicViewLink}"/>
+                <br />
+                <h:commandLink action="#{clinicController.prepareList}" value="#{bundle.EditClinicShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditClinicIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

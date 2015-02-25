@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>index</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        Hello from index Facelets
+        <br />
+        <h:link outcome="/mrrs/appointment/List" value="Show All Appointment Items"
+              rendered="#{userController.selected.user_Type!=1}"  
+              target='index'/>
+        <br />
+        <h:link outcome="/mrrs/clinic/List" value="Show All Clinic Items"
+                target="index" 
+                rendered="#{userController.selected.user_Type==1}"  />
+        <br />
+        <h:link outcome="/mrrs/medicalPicture/List" value="Show All MedicalPicture Items"
+                target="index" 
+                rendered="#{userController.selected.user_Type==1}" />
+        <br />
+        <h:link outcome="/mrrs/medicalRecord/List" 
+                 value="Show All MedicalRecord Items"
+                 target="index" 
+                rendered="#{userController.selected.user_Type==1}" />
+        <br />
+        <h:link outcome="/mrrs/medications/List" value="Show All Medications Items"
+                target='index'/>
+        <br />
+        <h:link outcome="/mrrs/patient/List" value="Show All Patient Items"
+                target="index" 
+                rendered="#{userController.selected.user_Type==1}" />
+        <br />
+        <h:link outcome="/index" value="#{bundle.ViewPatientIndexLink}"
+                target="index" 
+                rendered="#{userController.selected.user_Type==3}" />
+        <br />
+        <h:link outcome="/mrrs/physician/List" value="Show All Physician Items"
+                rendered="#{userController.selected.user_Type==1}"
+                target='index'/>
+        <br />
+        <h:link outcome="/mrrs/role/List" value="Show All Role Items"
+                rendered="#{userController.selected.user_Type==1}"
+                target='index'/>
+        <br />
+        <h:link outcome="/mrrs/task/List" value="Show All Task Items"
+                rendered="#{userController.selected.user_Type==1}"
+                target='index'/>
+        <br />
+        <h:link outcome="/mrrs/user/List" value="Show All User Items"
+                rendered="#{userController.selected.user_Type==1}"
+                target='index'/>
+        <br />
+        <h:link outcome="/mrrs/userRoleMap/List" value="Show All UserRoleMap Items"
+                rendered="#{userController.selected.user_Type==1}"
+                target='index'/>
+    </h:body>
+
+
+
+
+
+
+
+
+
+
+
+</html>
+

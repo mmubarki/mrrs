@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAppointmentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAppointmentEmpty}" rendered="#{appointmentController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{appointmentController.items.rowCount > 0}">
+                    <h:outputText value="#{appointmentController.pagination.pageFirstItem + 1}..#{appointmentController.pagination.pageLastItem + 1}/#{appointmentController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{appointmentController.previous}" value="#{bundle.Previous} #{appointmentController.pagination.pageSize}" rendered="#{appointmentController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{appointmentController.next}" value="#{bundle.Next} #{appointmentController.pagination.pageSize}" rendered="#{appointmentController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{appointmentController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAppointmentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAppointmentTitle_appointmentDATE}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.appointmentDATE}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAppointmentTitle_clinicId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clinicId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAppointmentTitle_physicianID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.physicianID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAppointmentTitle_recordId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recordId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{appointmentController.prepareView}" value="#{bundle.ListAppointmentViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{appointmentController.prepareEdit}" value="#{bundle.ListAppointmentEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{appointmentController.destroy}" value="#{bundle.ListAppointmentDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{appointmentController.prepareCreate}" value="#{bundle.ListAppointmentCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAppointmentIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
